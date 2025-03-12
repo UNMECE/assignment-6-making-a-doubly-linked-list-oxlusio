@@ -1,8 +1,9 @@
 #include "coordinate.h"
 #include <iostream>
 #include <cmath>
+#include <limits>
 
-static int current_id = 0;
+int current_id = 0;
 
 void add_coordinate(Coordinate *list_end, float x, float y) {
 	Coordinate *new_coord = new Coordinate;
@@ -34,7 +35,7 @@ void backward_display(Coordinate *list_end) {
 
 void delete_coordinate(Coordinate *list_beginning, int coord_id_to_delete) {
 	Coordinate *current = list_beginning;
-	while (current != nullpty) {
+	while (current != nullptr) {
 		if (current->coord_id == coord_id_to_delete) {
 			if (current->previous != nullptr) {
 				current->previous->next = current->next;
@@ -67,16 +68,16 @@ void closest_to(Coordinate *list_beginning, float x, float y) {
 	while (current != nullptr) {
 		float distance = std::sqrt(std::pow(current->x - x, 2) + std::pow(current-> y - y, 2));
 		if (distance < min_distance) {
-			min_distance = distance:
+			min_distance = distance;
 			closest = current;
 		}
 		current = current->next;
 	}
 
 	if (closest != nullptr) {
-		std::cout << "Closest coordinate to {" << x << ", " <<  y << ") is ID: " << closest->coord_id << " (x " << closest->x << ", y: " << closest->y << ") with distance: " <<min_distance << "\n";
-		} else { 
-			std::cout << "No coodinates found.\n";
+		std::cout << "Closest coordinate to (" << x << ", " << y << ") is ID: " << closest->coord_id
+		<< " (x: " << closest->x << ", y: " << closest->y << ") with distance: " << min_distance << "\n";
+		} else {
+		std::cout << "No coordinates found.\n";
 		}
-}
-
+	}
