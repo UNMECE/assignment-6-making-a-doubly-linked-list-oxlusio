@@ -3,15 +3,17 @@
 #include <cstdlib>
 #include <ctime>
 
+extern int current_id;
+
 int main(int argc, char *argv[]) {
 	if (argc != 2) {
-		std::cer << "Usage: " << argv[0] << " <number_of_coordinates>\n";
+		std::cerr << "Usage: " << argv[0] << " <number_of_coordinates>\n";
 		return 1;
 	}
 
 	int num_coordinates = std::atoi(argv[1]);
 	if (num_coordinates <= 0) {
-		std::cer << "Please eneter a positive number of coordinates.\n";
+		std::cerr << "Please enter a positive number of coordinates.\n";
 		return 1;
 	}
 
@@ -20,7 +22,7 @@ int main(int argc, char *argv[]) {
 	Coordinate *list_end = nullptr;
 
 	int i;
-	for ( i = 0; i < num_coordinate; ++i) {
+	for ( i = 0; i < num_coordinates; ++i) {
 		float x = static_cast<float>(std::rand()) / RAND_MAX * 100;
 		float y = static_cast<float>(std::rand()) / RAND_MAX * 100;
 
@@ -28,7 +30,7 @@ int main(int argc, char *argv[]) {
 			list_beginning = new Coordinate{x, y, current_id++, nullptr, nullptr};
 			list_end = list_beginning;
 			} else {
-				add_coordinates(list_end, x, y);
+				add_coordinate(list_end, x, y);
 				list_end = list_end->next;
 			}
 		}
@@ -40,7 +42,7 @@ int main(int argc, char *argv[]) {
 	backward_display(list_end);
 
 	int coord_id_to_delete;
-	std::cout << "\n"Enter the ID of the coordinate to delete: ";
+	std::cout << "\nEnter the ID of the coordinate to delete: ";
 	std::cin >> coord_id_to_delete;
 	delete_coordinate(list_beginning, coord_id_to_delete);
 
@@ -50,7 +52,7 @@ int main(int argc, char *argv[]) {
 	float x, y;
 	std::cout << "\nEnter an x and y coordinate to find the closest point: ";
 	std::cin >> x >> y;
-	closet_to(list_beginning, x, y);
+	closest_to(list_beginning, x, y);
 
 	return 0;
 }
